@@ -1,0 +1,13 @@
+{
+    "name": "crachecode/prestajine",
+    "description": "Prestashop plugin to improve images management using Intervention Image",
+    "require": {
+        "intervention/image": "^2.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Timothee Crozat"
+        }
+    ]
+}
