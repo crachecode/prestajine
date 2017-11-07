@@ -18,6 +18,12 @@ Prestajine requires PHP 5.6 or higher. It works with any version of Prestashop. 
 
 ## Installation
 
+### Manually
+
+ 1. [This zip](https://packages.crachecode.net/prestajine/prestajine_latest.zip) contains an `images` directory. Simply extract it in the root directory of your Prestashop installation. 
+
+### Command line
+
  1. Clone the repository using Git in Prestashop root directory :  
  `git clone https://github.com/crachecode/prestajine.git`
  
@@ -26,9 +32,6 @@ Prestajine requires PHP 5.6 or higher. It works with any version of Prestashop. 
 
  3. Install dependencies using Composer :  
  `composer update`
-
- 4. Allow writing on the cache directory :  
- `chmod 777 public/img/cache`
 
 ## Using Prestajine
 
@@ -49,13 +52,13 @@ e.g. :
 
 ### Parameters
 
-| name            | value type                          | description                                                                   | default       |
-| ---             | ---                                 | ---                                                                           | ---           |
-| ```width```     | integer                             | thumbnail width (in pixel)                                                    | n/a           |
-| ```height```    | integer                             | thumbnail height (in pixel)                                                   | n/a           |
-| ```method```    | ```basic```, ```fit``` or ```max``` | resizing behaviour, see next paragraph                                        | ```fit```     |
-| ```quality```   | integer, ```0``` to ```100```       | thumbnail quality, bigger is better but files are heavier                     | ```85```      |
-| ```upsize```    | boolean                             | whether or not small images should be enlarged with larger thumbnail size     | ```true```    |
+| name      | value type              | description                                                               | default |
+| ---       | ---                     | ---                                                                       | ---     |
+| `width`   | integer                 | thumbnail width (in pixel)                                                | n/a     |
+| `height`  | integer                 | thumbnail height (in pixel)                                               | n/a     |
+| `method`  | `basic`, `fit` or `max` | resizing behaviour, see next paragraph                                    | `fit`   |
+| `quality` | integer, `0` to `100`   | thumbnail quality, bigger is better but files are heavier                 | `85`    |
+| `upsize`  | boolean                 | whether or not small images should be enlarged with larger thumbnail size | `true`  |
 
 **Method** can be set to :
 * `basic` : image will be resized to the exact dimension, without keeping aspect ratio.
@@ -67,6 +70,6 @@ If both are specified, image will be cropped if necessary.
 ### Notes
 
 Thumbnails are generated when visiting the page on which they are displayed.  
-Generated thumbnails are saved as image files in ```images/public/img/cache``` directory.  
+Generated thumbnails are saved as image files in `[prestashop_root]/img/prestajine` directory.  
 When using mod_rewrite these files names are the same string as the URL provided for images generation. Therefore Apache doesn't even need to process PHP to display the cached version.  
 They can safely be deleted to process the generation again.
