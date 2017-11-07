@@ -44,8 +44,8 @@ e.g. :
 without mod_rewrite :  
 `{$base_dir}images/index.php?filename={$image.id_image}.jpg&width=[width]&height=[height]&method=[method]&quality=[quality]&upsize=[upsize]`  
 e.g. :  
-* `{$base_dir}images/index.php?filename=image.jpg&width=1280&height=1024&method=basic&quality=90&upsize=false`  
-* `{$base_dir}images/index.php?filename=image.jpg&height=1024`
+* `{$base_dir}images/index.php?filename={$image.id_image}.jpg&width=1280&height=1024&method=basic&quality=90&upsize=false`  
+* `{$base_dir}images/index.php?filename={$image.id_image}.jpg&height=1024`
 
 ### Parameters
 
