@@ -1,6 +1,6 @@
 {
     "name": "crachecode/prestajine",
-    "description": "Prestashop plugin to improve images management using Intervention Image",
+    "description": "Prestashop side script to improve images management using Intervention Image",
     "type": "project",
     "keywords": ["prestashop","image","thumbnail","resize","cache"],
     "homepage": "https://github.com/crachecode/prestajine",
