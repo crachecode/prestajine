@@ -51,8 +51,6 @@ e.g. :
 
 | name            | value type                          | description                                                                   | default       |
 | ---             | ---                                 | ---                                                                           | ---           |
-| ```name```      | string                              | filename as accessible in ```tajine/public/img/originals``` without extension | n/a, required |
-| ```extension ```| string                              | extension of filename as accessible in ```tajine/public/img/originals```      | n/a, required |
 | ```width```     | integer                             | thumbnail width (in pixel)                                                    | n/a           |
 | ```height```    | integer                             | thumbnail height (in pixel)                                                   | n/a           |
 | ```method```    | ```basic```, ```fit``` or ```max``` | resizing behaviour, see next paragraph                                        | ```fit```     |
@@ -69,6 +67,6 @@ If both are specified, image will be cropped if necessary.
 ### Notes
 
 Thumbnails are generated when visiting the page on which they are displayed.  
-Generated thumbnails are saved as image files in ```tajine/public/img/cache``` directory.  
+Generated thumbnails are saved as image files in ```images/public/img/cache``` directory.  
 When using mod_rewrite these files names are the same string as the URL provided for images generation. Therefore Apache doesn't even need to process PHP to display the cached version.  
 They can safely be deleted to process the generation again.
