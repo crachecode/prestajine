@@ -30,22 +30,22 @@ Prestajine requires PHP 5.6 or higher. It works with any version of Prestashop. 
  4. Allow writing on the cache directory :  
  `chmod 777 public/img/cache`
 
-## Using Tajine
+## Using Prestajine
 
-Image at any dimension can then be accessed in HTTP. Simply call `<img src="images/...` from theme templates following one of these URL syntaxes :
+Image at any dimension can then be accessed in HTTP. Simply call `<img src="{$base_dir}images/{$image.id_image}...` from theme templates following one of these URL syntaxes :
 
 with apache and mod_rewrite :  
-`images/{name}.{width}x{height}.{method}.{quality}.{upsize}.{extension}`  
+`{$base_dir}images/{$image.id_image}.[width]x[height].[method].[quality].[upsize].jpg`  
 e.g. :  
-* `image.1280x1024.basic.90.false.jpg` (width = 1280px, height = 1024px, basic method, jpg quality 90, no upsizing)  
-* `image.1280x.false.jpg` (width = 1280px, no height specified, no upsizing)  
-* `image.x1024.jpg` (height = 1024px, no width specified)  
+* `{$base_dir}images/{$image.id_image}.1280x1024.basic.90.false.jpg` (width = 1280px, height = 1024px, basic method, jpg quality 90, no upsizing)  
+* `{$base_dir}images/{$image.id_image}.1280x.false.jpg` (width = 1280px, no height specified, no upsizing)  
+* `{$base_dir}images/{$image.id_image}.x1024.jpg` (height = 1024px, no width specified)  
 
 without mod_rewrite :  
-`images/index.php?filename={name}.{extension}&width={width}&height={height}&method={method}&quality={quality}&upsize={upsize}`  
+`{$base_dir}images/index.php?filename={$image.id_image}.jpg&width=[width]&height=[height]&method=[method]&quality=[quality]&upsize=[upsize]`  
 e.g. :  
-* `index.php?filename=image.jpg&width=1280&height=1024&method=basic&quality=90&upsize=false`  
-* `index.php?filename=image.jpg&height=1024`
+* `{$base_dir}images/index.php?filename=image.jpg&width=1280&height=1024&method=basic&quality=90&upsize=false`  
+* `{$base_dir}images/index.php?filename=image.jpg&height=1024`
 
 ### Parameters
 
