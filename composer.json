@@ -1,13 +1,22 @@
 {
     "name": "crachecode/prestajine",
     "description": "Prestashop plugin to improve images management using Intervention Image",
-    "require": {
-        "intervention/image": "^2.3"
-    },
+    "type": "project",
+    "keywords": ["prestashop","image","thumbnail","resize","cache"],
+    "homepage": "https://github.com/crachecode/prestajine",
     "license": "MIT",
+    "require": {
+        "crachecode/tajine": "^1.0"
+    },
     "authors": [
         {
-            "name": "Timothee Crozat"
+            "name": "Timothée Crozat",
+            "email": "timot+git@crachecode.net",
+            "homepage": "https://www.crachecode.net",
+            "role": "Developer"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {"Crachecode\\Prestajine\\": "app/"}
+    }
 }

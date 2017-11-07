@@ -1,78 +1,74 @@
 Prestajine
 ==========
 
-Prestajine is an extra image manager for [PrestaShop](https://github.com/PrestaShop/PrestaShop). It uses the [Intervention Image](https://github.com/Intervention/image) library.
+Prestajine is a thumbnail generator meant to be used with Prestashop. It is based on [Tajine](https://github.com/crachecode/tajine) which makes use of the [Intervention Image](https://github.com/Intervention/image) library.
 
 ## Features
 
-Prestajine is not bypassing PrestaShop's original image manager, it adds an extra management.  
-It allows you to create images and thumbnails at any dimensions, in a flexible way,
-always keeping aspect ratio (no stretching) without adding any plain background.
+Prestajine is an alternative to PrestaShop's original image manager.  
+It allows you to create images and thumbnails at any dimensions, in a flexible way, without adding any plain background.
+Desired images dimensions and parameters are to be defined directly in theme templates, while calling `<img src="...`.  
+Resizing and cache are handled by Tajine.
 
-**Currently it only works with products images, and only with jpg.**
+**Currently it only works with products images.**
 
 ## Requirements
 
-Prestajine has been developed and tested on PrestaShop 1.6.1.1
+Prestajine requires PHP 5.6 or higher. It works with any version of Prestashop. Its cache functionality can make use of Apache mod_rewrite, it also allows simpler image URLs, but Apache should not be mandatory. Tajine has not been tested with any other HTTP server though.
 
 ## Installation
 
- 1. Clone the repository using Git in the modules directory :  
+ 1. Clone the repository using Git in Prestashop root directory :  
  `git clone https://github.com/crachecode/prestajine.git`
+ 
+ 2. Rename and enter the new directory :  
+ `mv prestajine images && cd images`
 
- 2. Install dependencies using Composer :  
+ 3. Install dependencies using Composer :  
  `composer update`
 
- 3. Copy the `config.example.php` file to `config.php` and modify as necessary.
+ 4. Allow writing on the cache directory :  
+ `chmod 777 public/img/cache`
 
- 4. Install the module from PrestaShop back-office.
+## Using Tajine
 
-## Configuration
+Image at any dimension can then be accessed in HTTP. Simply call `<img src="images/...` from theme templates following one of these URL syntaxes :
 
-Copy `config.example.php` to `config.php` and edit it.
+with apache and mod_rewrite :  
+`images/{name}.{width}x{height}.{method}.{quality}.{upsize}.{extension}`  
+e.g. :  
+* `image.1280x1024.basic.90.false.jpg` (width = 1280px, height = 1024px, basic method, jpg quality 90, no upsizing)  
+* `image.1280x.false.jpg` (width = 1280px, no height specified, no upsizing)  
+* `image.x1024.jpg` (height = 1024px, no width specified)  
 
-Image types are defined as such :
-```
-'products' => [
-	'big' => [
-		'width' => 1280,
-		'height' => 1024,
-		'method' => 'basic',
-		'quality' => 90,
-		'upsize' => false
-	],
-	'thumbnail' => [
-		'width' => 120,
-		'height' => 100,
-		'method' => 'fit',
-		'quality' => 95,
-		'upsize' => true,
-		'regen' => true
-	]
-]
-```
-Images always keep their aspect ratios.  
-`big` and `thumbnail` are image types (name for size format). Do not use any special character, these names will be used to create directories.
+without mod_rewrite :  
+`images/index.php?filename={name}.{extension}&width={width}&height={height}&method={method}&quality={quality}&upsize={upsize}`  
+e.g. :  
+* `index.php?filename=image.jpg&width=1280&height=1024&method=basic&quality=90&upsize=false`  
+* `index.php?filename=image.jpg&height=1024`
 
-If you don't specify **width** *or* **height**, images will be set to the dimension you specify,
-and the other dimension will be adjusted keeping original aspect ratio.  
-Method doesn't have to be specified in that case.
+### Parameters
 
-**Methods** can be set to `basic` (default, images will be resized not to exceed specified dimensions),
-or `fit` (images will be resized to the exact dimension you specify, cropping some parts if necessary).
+| name            | value type                          | description                                                                   | default       |
+| ---             | ---                                 | ---                                                                           | ---           |
+| ```name```      | string                              | filename as accessible in ```tajine/public/img/originals``` without extension | n/a, required |
+| ```extension ```| string                              | extension of filename as accessible in ```tajine/public/img/originals```      | n/a, required |
+| ```width```     | integer                             | thumbnail width (in pixel)                                                    | n/a           |
+| ```height```    | integer                             | thumbnail height (in pixel)                                                   | n/a           |
+| ```method```    | ```basic```, ```fit``` or ```max``` | resizing behaviour, see next paragraph                                        | ```fit```     |
+| ```quality```   | integer, ```0``` to ```100```       | thumbnail quality, bigger is better but files are heavier                     | ```85```      |
+| ```upsize```    | boolean                             | whether or not small images should be enlarged with larger thumbnail size     | ```true```    |
 
-**Upsize** defines if you want to resize images when originals are smaller than destinations.
+**Method** can be set to :
+* `basic` : image will be resized to the exact dimension, without keeping aspect ratio.
+* `fit` : image will be resized to fit in specified width and / or height, keeping aspect ratio.  
+If only one dimension is specified, unspecified dimension (width or height) will be adjusted depending on the other dimension.  
+If both are specified, image will be cropped if necessary.
+* `max` : image will be resized to fit in specified width and / or height, keeping aspect ratio, without cropping.
 
-**Regen** specify if every images have to be regenerated (e.g. put it on if you changed anything in the setup). Otherwise image files are generated only if they don't exist yet.
+### Notes
 
-## Using Prestajine
-
-Prestajine creates an img/prestajine directory, in which each image type has its own subdirectory.  
-Images are saved in these directories as `[image id].jpg` when you add new images for a product,
-or when you regenerate thumbnails from the back-office (Preferences > Images > Regenerate Thumbnails).
-
-You can display them in your template files using this code :
-```
-{$img_ps_dir}prestajine/[image type]/{$image.id_image}.jpg
-```
-You have to replace `[image type]` depending on which one you want to display.
+Thumbnails are generated when visiting the page on which they are displayed.  
+Generated thumbnails are saved as image files in ```tajine/public/img/cache``` directory.  
+When using mod_rewrite these files names are the same string as the URL provided for images generation. Therefore Apache doesn't even need to process PHP to display the cached version.  
+They can safely be deleted to process the generation again.

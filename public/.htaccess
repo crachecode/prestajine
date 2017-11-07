@@ -1,0 +1,11 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteCond %{DOCUMENT_ROOT}/img/cache/$1 -f
+RewriteRule ^(.*)$ img/cache/$1 [L]
+
+RewriteRule ^(.*)\.(\d*)?x(\d*)?(?:\.(basic|fit|max))?(?:\.(\d*))?(?:\.(true|false|0|1))?\.([A-Za-z]{3,4})$ index.php?filename=$1.$7&width=$2&height=$3&method=$4&quality=$5&upsize=$6 [L]
