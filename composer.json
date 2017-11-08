@@ -6,7 +6,7 @@
     "homepage": "https://github.com/crachecode/prestajine",
     "license": "MIT",
     "require": {
-        "crachecode/tajine": "^1.0"
+        "crachecode/tajine": "^1.0.1"
     },
     "authors": [
         {

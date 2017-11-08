@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3b690ae8d601935d421fd096f499796",
+    "content-hash": "da9b2eeb30b2ce52315974b9ec734466",
     "packages": [
         {
             "name": "crachecode/tajine",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/crachecode/tajine.git",
-                "reference": "de2d759661dcb14c6572040e2acefefe891fd09c"
+                "reference": "dac474d2a080181fd19fb5e3372eaa7a8e8fa640"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/crachecode/tajine/zipball/de2d759661dcb14c6572040e2acefefe891fd09c",
-                "reference": "de2d759661dcb14c6572040e2acefefe891fd09c",
+                "url": "https://api.github.com/repos/crachecode/tajine/zipball/dac474d2a080181fd19fb5e3372eaa7a8e8fa640",
+                "reference": "dac474d2a080181fd19fb5e3372eaa7a8e8fa640",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                 "image",
                 "resize"
             ],
-            "time": "2017-11-06T23:51:42+00:00"
+            "time": "2017-11-07T06:33:25+00:00"
         },
         {
             "name": "guzzlehttp/psr7",

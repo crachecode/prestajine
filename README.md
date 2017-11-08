@@ -1,7 +1,7 @@
 Prestajine
 ==========
 
-Prestajine is a thumbnail generator meant to be used with Prestashop. It is based on [Tajine](https://github.com/crachecode/tajine) which makes use of the [Intervention Image](https://github.com/Intervention/image) library.
+Prestajine is PrestaShop module that helps to generate images and thumbnails, directly by providing dimensions in the theme templates files, with no extra management from the administration panel. It is based on [Tajine](https://github.com/crachecode/tajine) which makes use of the [Intervention Image](https://github.com/Intervention/image) library.
 
 ## Features
 
@@ -10,7 +10,7 @@ It allows you to create images and thumbnails at any dimensions, in a flexible w
 Desired images dimensions and parameters are to be defined directly in theme templates, while calling `<img src="...`.  
 Resizing and cache are handled by Tajine.
 
-**Currently it only works with products images.**
+**Currently it only works with products images and jpg.**
 
 ## Requirements
 
@@ -18,37 +18,23 @@ Prestajine requires PHP 5.6 or higher. It works with any version of Prestashop. 
 
 ## Installation
 
-### Manually
+ 1. Download [this zip](https://packages.crachecode.net/prestajine/prestajine_latest.zip).
 
- 1. [This zip](https://packages.crachecode.net/prestajine/prestajine_latest.zip) contains an `images` directory. Simply extract it in the root directory of your Prestashop installation. 
+ 2. Upload it from Prestashop administration panel :  
+ `Module and services` -> `Add a new module` -> `choose a file` -> `upload this module`
 
-### Command line
-
- 1. Clone the repository using Git in Prestashop root directory :  
- `git clone https://github.com/crachecode/prestajine.git`
- 
- 2. Rename and enter the new directory :  
- `mv prestajine images && cd images`
-
- 3. Install dependencies using Composer :  
- `composer update`
+ 3. Install it :  
+ `Pretajine` -> `Install`
 
 ## Using Prestajine
 
 Image at any dimension can then be accessed in HTTP. Simply call `<img src="{$base_dir}images/{$image.id_image}...` from theme templates following one of these URL syntaxes :
 
-with apache and mod_rewrite :  
 `{$base_dir}images/{$image.id_image}.[width]x[height].[method].[quality].[upsize].jpg`  
 e.g. :  
 * `{$base_dir}images/{$image.id_image}.1280x1024.basic.90.false.jpg` (width = 1280px, height = 1024px, basic method, jpg quality 90, no upsizing)  
 * `{$base_dir}images/{$image.id_image}.1280x.false.jpg` (width = 1280px, no height specified, no upsizing)  
 * `{$base_dir}images/{$image.id_image}.x1024.jpg` (height = 1024px, no width specified)  
-
-without mod_rewrite :  
-`{$base_dir}images/index.php?filename={$image.id_image}.jpg&width=[width]&height=[height]&method=[method]&quality=[quality]&upsize=[upsize]`  
-e.g. :  
-* `{$base_dir}images/index.php?filename={$image.id_image}.jpg&width=1280&height=1024&method=basic&quality=90&upsize=false`  
-* `{$base_dir}images/index.php?filename={$image.id_image}.jpg&height=1024`
 
 ### Parameters
 
@@ -67,7 +53,16 @@ If only one dimension is specified, unspecified dimension (width or height) will
 If both are specified, image will be cropped if necessary.
 * `max` : image will be resized to fit in specified width and / or height, keeping aspect ratio, without cropping.
 
-### Notes
+## Without mod_rewrite
+
+You should still be able to use this module without mod_rewrite or with a HTTP server other than Apache. However the image URLs to call from the templates would be a bit different (and not so nice) :
+
+   `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}.jpg&width=[width]&height=[height]&method=[method]&quality=[quality]&upsize=[upsize]`  
+   e.g. :  
+   * `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}.jpg&width=1280&height=1024&method=basic&quality=90&upsize=false`  
+   * `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}.jpg&height=1024`
+
+## Notes
 
 Thumbnails are generated when visiting the page on which they are displayed.  
 Generated thumbnails are saved as image files in `[prestashop_root]/img/prestajine` directory.  

@@ -1,7 +1,6 @@
 <?php
 
-// include composer autoload
-require '../vendor/autoload.php';
+require 'vendor/autoload.php';
 
 $originals_path = dirname(__FILE__).'/../../img/p';
 $cache_path = dirname(__FILE__).'/../../img/prestajine';
