@@ -1,7 +1,7 @@
 Prestajine
 ==========
 
-Prestajine is PrestaShop module that helps to generate images and thumbnails, directly by providing dimensions in the theme templates files, with no extra management from the administration panel. It is based on [Tajine](https://github.com/crachecode/tajine) which makes use of the [Intervention Image](https://github.com/Intervention/image) library.
+Prestajine is a PrestaShop module that helps to generate images and thumbnails, directly by providing dimensions in the theme templates files, with no extra management from the administration panel. It is based on [Tajine](https://github.com/crachecode/tajine) which makes use of the [Intervention Image](https://github.com/Intervention/image) library.
 
 ## Features
 
@@ -59,7 +59,8 @@ If both are specified, image will be cropped if necessary.
 
 You should still be able to use this module without mod_rewrite or with a HTTP server other than Apache. However the image URLs to call from the templates would be a bit different (and not so nice) :
 
-   `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}.jpg&width=[width]&height=[height]&method=[method]&quality=[quality]&upsize=[upsize]`  
+   `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}.jpg&width=[width]&height=[height]&method=[method]&quality=[quality]&upsize=[upsize]`
+
    e.g. :  
    * `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}.jpg&width=1280&height=1024&method=basic&quality=90&upsize=false`  
    * `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}.jpg&height=1024`
