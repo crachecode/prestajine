@@ -14,13 +14,13 @@ Resizing and cache are handled by Tajine.
 
 ## Requirements
 
-Prestajine requires PHP 5.6 or higher. It works with any version of Prestashop. Its cache functionality can make use of Apache mod_rewrite, it also allows simpler image URLs, but Apache should not be mandatory. Tajine has not been tested with any other HTTP server though.
+Prestajine requires PHP 5.6 or higher. It works with any version of PrestaShop. Its cache functionality can make use of Apache mod_rewrite, it also allows simpler image URLs, but Apache should not be mandatory. Tajine has not been tested with any other HTTP server though.
 
 ## Installation
 
  1. Download [this zip](https://packages.crachecode.net/prestajine/prestajine_latest.zip).
 
- 2. Upload it from Prestashop administration panel :  
+ 2. Upload it from PrestaShop administration panel :  
  `Module and services` -> `Add a new module` -> `choose a file` -> `upload this module`
 
  3. Install it :  
@@ -28,9 +28,10 @@ Prestajine requires PHP 5.6 or higher. It works with any version of Prestashop. 
 
 ## Using Prestajine
 
-Image at any dimension can then be accessed in HTTP. Simply call `<img src="{$base_dir}images/{$image.id_image}...` from theme templates following this syntax :
+Images at any dimension can then be accessed in HTTP. Simply call `<img src="{$base_dir}images/{$image.id_image}...` from theme templates following this syntax :
 
-`{$base_dir}images/{$image.id_image}.[width]x[height].[method].[quality].[upsize].jpg`  
+`{$base_dir}images/{$image.id_image}.[width]x[height].[method].[quality].[upsize].jpg`
+
 e.g. :  
 * `{$base_dir}images/{$image.id_image}.1280x1024.basic.90.false.jpg` (width = 1280px, height = 1024px, basic method, jpg quality 90, no upsizing)  
 * `{$base_dir}images/{$image.id_image}.1280x.false.jpg` (width = 1280px, no height specified, no upsizing)  
@@ -65,6 +66,6 @@ You should still be able to use this module without mod_rewrite or with a HTTP s
 ## Notes
 
 Thumbnails are generated when visiting the page on which they are displayed.  
-Generated thumbnails are saved as image files in `[prestashop_root]/img/prestajine` directory.  
+Generated thumbnails are saved as image files in `/img/prestajine` directory.  
 When using mod_rewrite these files names are the same string as the URL provided for images generation. Therefore Apache doesn't even need to process PHP to display the cached version.  
 They can safely be deleted to process the generation again.
