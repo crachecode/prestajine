@@ -28,7 +28,7 @@ Prestajine requires PHP 5.6 or higher. It works with any version of Prestashop. 
 
 ## Using Prestajine
 
-Image at any dimension can then be accessed in HTTP. Simply call `<img src="{$base_dir}images/{$image.id_image}...` from theme templates following one of these URL syntaxes :
+Image at any dimension can then be accessed in HTTP. Simply call `<img src="{$base_dir}images/{$image.id_image}...` from theme templates following this syntax :
 
 `{$base_dir}images/{$image.id_image}.[width]x[height].[method].[quality].[upsize].jpg`  
 e.g. :  
