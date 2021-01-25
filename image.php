@@ -8,7 +8,7 @@ $cache_path = dirname(__FILE__).'/../../img/prestajine';
 $image = new Crachecode\Prestajine\Image();
 
 $image->manual = array();
-$params = array('filename','width','height','method','quality','upsize');
+$params = array('filename','width','height','method','quality','upsize','text');
 foreach ($params as $param) {
 	if (isset($_GET[$param]) && !empty($_GET[$param])){
 		$image->$param = $_GET[$param];

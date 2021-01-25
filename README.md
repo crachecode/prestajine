@@ -31,12 +31,12 @@ Prestajine requires PHP 5.6 or higher. It works with any version of PrestaShop. 
 Images at any dimension can then be accessed via HTTP.  
 Simply call `<img src="{$base_dir}images/{$image.id_image}...` from theme templates following this syntax :
 
-`{$base_dir}images/{$image.id_image}.[width]x[height].[method].[quality].[upsize].jpg`
+`{$base_dir}images/{$image.id_image}-[image-name].[width]x[height].[method].[quality].[upsize].jpg`
 
 e.g. :  
-* `{$base_dir}images/{$image.id_image}.1280x1024.basic.90.false.jpg` (width = 1280px, height = 1024px, basic method, jpg quality 90, no upsizing)  
-* `{$base_dir}images/{$image.id_image}.1280x.false.jpg` (width = 1280px, no height specified, no upsizing)  
-* `{$base_dir}images/{$image.id_image}.x1024.jpg` (height = 1024px, no width specified)  
+* `{$base_dir}images/{$image.id_image}-product-1.1280x1024.basic.90.false.jpg` (width = 1280px, height = 1024px, basic method, jpg quality 90, no upsizing)  
+* `{$base_dir}images/{$image.id_image}-product-1.1280x.false.jpg` (width = 1280px, no height specified, no upsizing)  
+* `{$base_dir}images/{$image.id_image}-product-1.x1024.jpg` (height = 1024px, no width specified)  
 
 ### Parameters
 
@@ -47,6 +47,7 @@ e.g. :
 | `method`  | `basic`, `fit` or `max` | resizing behaviour, see next paragraph                                    | `fit`   |
 | `quality` | integer, `0` to `100`   | thumbnail quality, bigger is better but files are heavier                 | `85`    |
 | `upsize`  | boolean                 | whether or not small images should be enlarged with larger thumbnail size | `true`  |
+| `text`    | string                  | name of the image (for instance, name of the product)                     | n/a     |
 
 **Method** can be set to :
 * `basic` : image will be resized to the exact dimension, without keeping aspect ratio.
@@ -59,11 +60,11 @@ If both are specified, image will be cropped if necessary.
 
 You should still be able to use this module without mod_rewrite or with a HTTP server other than Apache. However the image URLs to call from the templates would be a bit different (and not so nice) :
 
-   `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}.jpg&width=[width]&height=[height]&method=[method]&quality=[quality]&upsize=[upsize]`
+   `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}-product-1.jpg&width=[width]&height=[height]&method=[method]&quality=[quality]&upsize=[upsize]`
 
    e.g. :  
-   * `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}.jpg&width=1280&height=1024&method=basic&quality=90&upsize=false`  
-   * `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}.jpg&height=1024`
+   * `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}-product-1.jpg&width=1280&height=1024&method=basic&quality=90&upsize=false`  
+   * `{$base_dir}modules/prestajine/image.php?filename={$image.id_image}-product-1.jpg&height=1024`
 
 ## Notes
 
