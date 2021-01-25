@@ -8,4 +8,4 @@ RewriteRule ^ - [L]
 RewriteCond ../../img/prestajine/$1 -F
 RewriteRule ^(.*)$ ../../img/prestajine/$1 [L]
 
-RewriteRule ^(.*)\.(\d*)?x(\d*)?(?:\.(basic|fit|max))?(?:\.(\d*))?(?:\.(true|false|0|1))?\.([A-Za-z]{3,4})$ image.php?filename=$1.$7&width=$2&height=$3&method=$4&quality=$5&upsize=$6 [L]
+RewriteRule ^(\d*)-(.*)\.(\d*)?x(\d*)?(?:\.(basic|fit|max))?(?:\.(\d*))?(?:\.(true|false|0|1))?\.([A-Za-z]{3,4})$ image.php?filename=$1.$8&width=$3&height=$4&method=$5&quality=$6&upsize=$7&text=$2 [L]
