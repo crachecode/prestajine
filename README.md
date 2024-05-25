@@ -1,3 +1,8 @@
+> [!WARNING]  
+> This repo is outdated.
+> 
+> Developement has moved to [GitLab](https://gitlab.com/crachecode/prestajine).
+
 Prestajine
 ==========
 
